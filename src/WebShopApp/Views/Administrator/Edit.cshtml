@@ -1,0 +1,64 @@
+@model AdministratorViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<form asp-action="Edit">
+    <div class="form-horizontal">
+        <h4>Products</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="products.ProductID" />
+        <div class="form-group">
+            <label asp-for="products.CategoryNumber" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="products.CategoryNumber" class="form-control" />
+                <span asp-validation-for="products.CategoryNumber" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="products.Description" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="products.Description" class="form-control" />
+                <span asp-validation-for="products.Description" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="products.Ingredients" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="products.Ingredients" class="form-control" />
+                <span asp-validation-for="products.Ingredients" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="products.ProductName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="products.ProductName" class="form-control" />
+                <span asp-validation-for="products.ProductName" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="products.UnitPrice" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="products.UnitPrice" class="form-control" />
+                <span asp-validation-for="products.UnitPrice" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

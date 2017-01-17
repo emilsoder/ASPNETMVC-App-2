@@ -1,0 +1,42 @@
+@model WebShopApplication.Models.Products
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Products</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Beskrivning
+        </dt>
+        <dd>
+            @Model.ProductDescription
+        </dd>
+        <dt>
+            Ingredienser
+        </dt>
+        <dd>
+            @Model.ProductIngredients
+        </dd>
+        <dt>
+            Produkt
+        </dt>
+        <dd>
+            @Model.ProductName
+        </dd>
+        <dt>
+            Pris
+        </dt>
+        <dd>
+            @Model.ProductPrice
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ProductID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

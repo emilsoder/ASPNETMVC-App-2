@@ -1,0 +1,75 @@
+﻿@using WebShopApp.Services
+@inject ShoppingCartDetailsService shoppingCartDetails
+@{
+    decimal totalPrice = 0;
+}
+<style>
+    .dropdown:hover .dropdown-menu {
+        display: block;
+        margin-top: 0;
+    }
+
+    .dropdown-menu{
+        border-radius:0px;
+        padding: 3px 3px;
+    }
+</style>
+<div class="panel panel-default shoppingCartPanel">
+    <div class="container">
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <div class="btn btn-primary pull-right goToCart" id="NOTLOGGEDIN">Till kassan</div>
+        }
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a asp-controller="ShoppingCart" asp-action="Index" class="btn btn-primary pull-right goToCart">Till kassan</a>
+        }
+
+
+        <div class="dropdown  pull-right cartItemsDropDown">
+            @if (User.Identity.Name != null)
+            {
+                <div class="dropdown-toggle btn btn-default" data-toggle="dropdown" href="#">
+                    Kundvagn(@shoppingCartDetails.GetCount(User.Identity.Name))
+                    <span class="caret"></span>
+                </div>
+                
+                <ul class="dropdown-menu " style="width:auto; min-width:300px">
+                    <content>
+                        <table class="table" >
+
+                            <tbody>
+                                @foreach (var item in shoppingCartDetails.currentShoppingCart(User.Identity.Name))
+                                {
+                                    totalPrice += item.UnitPrice;
+                                    string price = item.UnitPrice.ToString()
+                                                    .Remove(item.UnitPrice.ToString()
+                                                    .IndexOf(',')) + " kr";
+
+                                    <tr>
+                                        <td>@item.ProductName </td>
+                                        <td>
+                                            @price
+                                        <a asp-action="RemoveProductFromCart" asp-route-productID="@item.ProductID" asp-route-currentUrl="" class="btn btn-default btn-xs" style="margin-left:15px"><span class="glyphicon glyphicon-remove"/></a>
+                                    </td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td><b>Summa:</b></td>
+                                    <td><b>@totalPrice kr</b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </content>
+                </ul> }
+
+            @if (User.Identity.Name == null)
+            {
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    Kundvagn(0)
+                    <span class="caret"></span>
+                </a>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<WebShopApp.Models.ShoppingCartDetails>
+@using WebShopApp.Services.ShoppingCartServices
+
+@{
+    ViewData["Title"] = "Index";
+    decimal totalPrice = 0;
+}
+
+<h2>Kundvagn</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Produkt
+            </th>
+            <th>
+                Pris/st
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{totalPrice = 0; }
+
+        @foreach (var item in Model)
+        {
+            totalPrice += item.UnitPrice;
+            <tr>
+                <td>
+                    @item.ProductName
+                </td>
+         
+                <td>
+                    @item.UnitPrice
+                </td>
+                <td></td>
+                <td>
+                    <form asp-action="Delete" asp-route-id="@item.ID">
+                        <input type="submit" value="Ta bort" class="btn btn-default" />
+                    </form>
+                </td>
+            </tr>
+
+        }
+        <tr>
+            <td> <b class="h4"><b>Totalt:</b></b></td>
+            <td> <b class="h4"><b>@totalPrice</b></b></td>
+            <td></td><td></td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="btn btn-success">Gå vidare till betalning</div>
+

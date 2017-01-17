@@ -1,0 +1,73 @@
+@model AdministratorViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@foreach (var item in Model._customers)
+{
+    <p>@item.Email</p><a asp-action="Edit" asp-route-id="@item.CustomerID">Edit</a>
+}
+<hr />
+@foreach (var item in Model._products)
+{
+    <p>@item.ProductName</p><a asp-action="Edit" asp-route-id="@item.ProductID">Edit</a>
+}
+<hr />
+@foreach (var item in Model._shoppingCartDetails)
+{
+    <p>@item.UnitPrice</p><a asp-action="Edit" asp-route-id="@item.ShoppingCartID">Edit</a>
+}
+@*<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ingredients)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitPrice)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ingredients)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ProductID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ProductID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ProductID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>*@

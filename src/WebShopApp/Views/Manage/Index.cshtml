@@ -1,0 +1,70 @@
+﻿@model Customers
+@{
+    ViewData["Title"] = "Manage your account";
+}
+
+<h2>Mina sidor</h2>
+<p class="text-success">@ViewData["StatusMessage"]</p>
+
+<div>
+    <h4>Ändra dina uppgifter</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Email:</dt>
+        <dd>
+            @User.Identity.Name
+        </dd>
+
+        <dt>Password:</dt>
+        <dd>
+            <a asp-controller="Manage" asp-action="ChangePassword" class="btn-bracketed">Ändra</a>
+        </dd>
+    </dl>
+</div>
+
+<form asp-controller="Manage" asp-action="UpdateCustomerDetails" method="post" class="form-horizontal">
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <input type="hidden" asp-for="CustomerID" />
+    <input type="hidden" asp-for="Email" />
+
+    <div class="form-group">
+        <label class="col-md-2 control-label">Förnamn</label>
+        <div class="col-md-10">
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Efternamn</label>
+        <div class="col-md-10">
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Address</label>
+        <div class="col-md-10">
+            <input asp-for="Address" class="form-control" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-2 control-label">Telefonnummer</label>
+        <div class="col-md-10">
+            <input asp-for="Phone" class="form-control" />
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-default">Spara ändringar</button>
+        </div>
+    </div>
+</form>
+<hr />
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
